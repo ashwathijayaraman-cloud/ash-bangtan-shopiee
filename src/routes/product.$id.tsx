@@ -62,7 +62,7 @@ function ProductPage() {
             <div className="mt-6 rounded-2xl border border-coffee/20 bg-cream p-5">
               <h2 className="font-display text-lg font-semibold text-coffee-dark">Details</h2>
               <ul className="mt-2 space-y-1.5 text-sm text-coffee-dark/80">
-                {product.specs.map((s) => (
+                {product.specs.map((s: string) => (
                   <li key={s} className="flex gap-2"><span className="text-coffee">♡</span>{s}</li>
                 ))}
               </ul>
