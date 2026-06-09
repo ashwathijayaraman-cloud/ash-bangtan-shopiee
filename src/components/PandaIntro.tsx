@@ -4,19 +4,17 @@ import panda from "@/assets/panda-mascot.png";
 const SEEN_KEY = "bangtan_intro_seen";
 
 export function PandaIntro() {
-  const [show, setShow] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return !sessionStorage.getItem(SEEN_KEY);
-  });
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (!show) return;
+    if (sessionStorage.getItem(SEEN_KEY)) return;
+    setShow(true);
     const t = setTimeout(() => {
       sessionStorage.setItem(SEEN_KEY, "1");
       setShow(false);
     }, 2600);
     return () => clearTimeout(t);
-  }, [show]);
+  }, []);
 
   if (!show) return null;
 
@@ -25,7 +23,10 @@ export function PandaIntro() {
       className="fixed inset-0 z-[100] flex items-end justify-center bg-champagne"
       style={{ animation: "intro-fade-out 0.5s ease-in 2.1s forwards" }}
     >
-      <div className="absolute top-1/3 text-center animate-fade-up" style={{ animationDelay: "1.6s", animationFillMode: "both", opacity: 0 }}>
+      <div
+        className="absolute top-1/3 text-center animate-fade-up"
+        style={{ animationDelay: "1.6s", animationFillMode: "both", opacity: 0 }}
+      >
         <h1 className="font-script text-6xl md:text-7xl text-coffee">Bangtan Shopiee</h1>
         <p className="mt-2 text-coffee-light">your cozy stationery corner</p>
       </div>
