@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ShopHeader } from "@/components/ShopHeader";
 import { products } from "@/lib/products";
 
-export const Route = createFileRoute("/product/$id")({
+export const Route = createFileRoute("/_authenticated/product/$id")({
   loader: ({ params }) => {
     const product = products.find((p) => p.id === params.id);
     if (!product) throw notFound();

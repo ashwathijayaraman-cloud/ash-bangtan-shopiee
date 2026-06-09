@@ -7,7 +7,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { products } from "@/lib/products";
 import stationery1 from "@/assets/stationery-1.jpg";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "Bangtan Shopiee — Cute stationery for cozy students" },
