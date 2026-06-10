@@ -129,6 +129,14 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
+    // First-visit splash gate
+    try {
+      const seen = sessionStorage.getItem("bangtan_splash_seen");
+      if (!seen && typeof window !== "undefined" && window.location.pathname !== "/splash") {
+        router.navigate({ to: "/splash", replace: true });
+      }
+    } catch { /* ignore */ }
+
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     import("@/integrations/supabase/client").then(({ supabase }) => {
       const { data: sub } = supabase.auth.onAuthStateChange((event) => {
