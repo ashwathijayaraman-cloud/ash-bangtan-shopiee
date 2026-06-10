@@ -34,7 +34,7 @@ function SplashPage() {
       id: i,
       left: 5 + Math.random() * 90,
       top: 25 + Math.random() * 55,
-      delay: 0.4 + Math.random() * 2.4,
+      delay: 0.6 + Math.random() * 3.4,
       size: 6 + Math.random() * 14,
       color: colors[i % colors.length],
       kind: kinds[i % kinds.length],
@@ -43,11 +43,11 @@ function SplashPage() {
 
   useEffect(() => {
     try { sessionStorage.setItem(SPLASH_SEEN_KEY, "1"); } catch { /* ignore */ }
-    const fadeT = setTimeout(() => setLeaving(true), 3300);
+    const fadeT = setTimeout(() => setLeaving(true), 5200);
     const navT = setTimeout(async () => {
       const { data } = await supabase.auth.getUser();
       navigate({ to: data.user ? "/" : "/login", replace: true });
-    }, 3900);
+    }, 5900);
     return () => { clearTimeout(fadeT); clearTimeout(navT); };
   }, [navigate]);
 
@@ -64,7 +64,7 @@ function SplashPage() {
       {/* title */}
       <div
         className="absolute left-1/2 top-[22%] -translate-x-1/2 text-center"
-        style={{ animation: "splash-title 1s ease-out 0.2s both" }}
+        style={{ animation: "splash-title 1.4s ease-out 0.3s both" }}
       >
         <h1 className="font-script text-6xl text-coffee md:text-7xl drop-shadow-[0_4px_8px_rgba(80,50,30,0.15)]">
           Bangtan Shopiee
@@ -83,7 +83,7 @@ function SplashPage() {
             width: s.size,
             height: s.size,
             color: s.color,
-            animation: `sparkle-pop 1.6s ease-out ${s.delay}s both`,
+            animation: `sparkle-pop 2.2s ease-out ${s.delay}s both`,
           }}
         >
           {s.kind === "star" && (
@@ -128,7 +128,7 @@ function SplashPage() {
             style={{
               strokeDasharray: 200,
               strokeDashoffset: 200,
-              animation: `trail-draw 3s ease-out ${0.2 + i * 0.08}s both`,
+              animation: `trail-draw 4.2s ease-out ${0.3 + i * 0.12}s both`,
             }}
           />
         ))}
@@ -144,7 +144,7 @@ function SplashPage() {
         style={{
           left: 0,
           top: 0,
-          animation: "panda-diagonal 3.2s cubic-bezier(0.45,0.05,0.2,1) 0.2s both",
+          animation: "panda-diagonal 4.5s cubic-bezier(0.45,0.05,0.2,1) 0.3s both",
         }}
       />
     </div>

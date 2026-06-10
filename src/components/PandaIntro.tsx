@@ -12,7 +12,7 @@ export function PandaIntro() {
     const t = setTimeout(() => {
       sessionStorage.setItem(SEEN_KEY, "1");
       setShow(false);
-    }, 2600);
+    }, 3700);
     return () => clearTimeout(t);
   }, []);
 
@@ -21,11 +21,11 @@ export function PandaIntro() {
   return (
     <div
       className="fixed inset-0 z-[100] flex items-end justify-center bg-champagne"
-      style={{ animation: "intro-fade-out 0.5s ease-in 2.1s forwards" }}
+      style={{ animation: "intro-fade-out 0.7s ease-in 3s forwards" }}
     >
       <div
         className="absolute top-1/3 text-center animate-fade-up"
-        style={{ animationDelay: "1.6s", animationFillMode: "both", opacity: 0 }}
+        style={{ animationDelay: "2.2s", animationFillMode: "both", opacity: 0 }}
       >
         <h1 className="font-script text-6xl md:text-7xl text-coffee">Bangtan Shopiee</h1>
         <p className="mt-2 text-coffee-light">your cozy stationery corner</p>

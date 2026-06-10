@@ -113,10 +113,10 @@
   50% { transform: translateY(-8px) rotate(2deg); }
 }
 
-.animate-panda-run { animation: panda-run 2.2s cubic-bezier(.4,.0,.2,1) forwards; }
+.animate-panda-run { animation: panda-run 3s cubic-bezier(.4,.0,.2,1) forwards; }
 .animate-panda-bob { animation: panda-idle-bob 2.4s ease-in-out infinite; }
-.animate-fade-up { animation: fade-up 0.7s ease-out both; }
-.animate-float-soft { animation: float-soft 5s ease-in-out infinite; }
+.animate-fade-up { animation: fade-up 1s ease-out both; }
+.animate-float-soft { animation: float-soft 7s ease-in-out infinite; }
 
 /* ---------- Splash screen ---------- */
 @keyframes panda-diagonal {
