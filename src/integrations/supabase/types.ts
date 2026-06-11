@@ -16,26 +16,53 @@ export type Database = {
     Tables: {
       profiles: {
         Row: {
+          address_line: string | null
+          age: number | null
           avatar_url: string | null
+          city: string | null
           created_at: string
+          date_of_birth: string | null
           display_name: string | null
+          email: string | null
+          gender: string | null
           id: string
+          phone: string | null
+          postal_code: string | null
+          state: string | null
           updated_at: string
           username: string | null
         }
         Insert: {
+          address_line?: string | null
+          age?: number | null
           avatar_url?: string | null
+          city?: string | null
           created_at?: string
+          date_of_birth?: string | null
           display_name?: string | null
+          email?: string | null
+          gender?: string | null
           id: string
+          phone?: string | null
+          postal_code?: string | null
+          state?: string | null
           updated_at?: string
           username?: string | null
         }
         Update: {
+          address_line?: string | null
+          age?: number | null
           avatar_url?: string | null
+          city?: string | null
           created_at?: string
+          date_of_birth?: string | null
           display_name?: string | null
+          email?: string | null
+          gender?: string | null
           id?: string
+          phone?: string | null
+          postal_code?: string | null
+          state?: string | null
           updated_at?: string
           username?: string | null
         }

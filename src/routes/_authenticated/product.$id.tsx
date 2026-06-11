@@ -1,8 +1,9 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { Heart, ShoppingCart, Zap, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { toast } from "sonner";
 import { ShopHeader } from "@/components/ShopHeader";
-import { products } from "@/lib/products";
+import { products, formatINR } from "@/lib/products";
+import { useCart, useWishlist } from "@/hooks/use-shop";
 
 export const Route = createFileRoute("/_authenticated/product/$id")({
   loader: ({ params }) => {
@@ -29,7 +30,23 @@ export const Route = createFileRoute("/_authenticated/product/$id")({
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
-  const [liked, setLiked] = useState(false);
+  const navigate = useNavigate();
+  const cart = useCart();
+  const wishlist = useWishlist();
+  const liked = wishlist.has(product.id);
+
+  const onAddToCart = () => {
+    cart.add(product.id, 1);
+    toast.success(`${product.name} added to cart ♡`);
+  };
+  const onBuyNow = () => {
+    cart.add(product.id, 1);
+    navigate({ to: "/checkout" });
+  };
+  const onToggleLike = () => {
+    const now = wishlist.toggle(product.id);
+    toast.success(now ? "Added to wishlist ♡" : "Removed from wishlist");
+  };
 
   return (
     <div className="min-h-screen bg-champagne">
@@ -49,14 +66,14 @@ function ProductPage() {
             <div className="mt-1 flex items-start justify-between gap-3">
               <h1 className="font-display text-3xl font-bold text-coffee-dark md:text-4xl">{product.name}</h1>
               <button
-                onClick={() => setLiked((v) => !v)}
+                onClick={onToggleLike}
                 aria-label="Like"
                 className="shrink-0 grid h-11 w-11 place-items-center rounded-full border border-coffee/25 bg-cream text-coffee transition hover:bg-blush"
               >
                 <Heart className={`h-5 w-5 ${liked ? "fill-coffee" : ""}`} />
               </button>
             </div>
-            <p className="mt-4 text-3xl font-bold text-coffee">${product.price.toFixed(2)}</p>
+            <p className="mt-4 text-3xl font-bold text-coffee">{formatINR(product.price)}</p>
             <p className="mt-4 leading-relaxed text-coffee-dark/80">{product.description}</p>
 
             <div className="mt-6 rounded-2xl border border-coffee/20 bg-cream p-5">
@@ -69,11 +86,17 @@ function ProductPage() {
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <button className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border-2 border-coffee bg-cream py-3 font-semibold text-coffee transition hover:bg-blush">
+              <button
+                onClick={onAddToCart}
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border-2 border-coffee bg-cream py-3 font-semibold text-coffee transition hover:bg-blush"
+              >
                 <ShoppingCart className="h-5 w-5" /> Add to Cart
               </button>
-              <button className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-coffee py-3 font-semibold text-cream shadow-soft transition hover:bg-coffee-dark">
-                <Zap className="h-5 w-5" /> Order Now
+              <button
+                onClick={onBuyNow}
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-coffee py-3 font-semibold text-cream shadow-soft transition hover:bg-coffee-dark"
+              >
+                <Zap className="h-5 w-5" /> Buy Now
               </button>
             </div>
           </div>

@@ -1,10 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { Heart } from "lucide-react";
-import { useState } from "react";
+import { toast } from "sonner";
 import type { Product } from "@/lib/products";
+import { formatINR } from "@/lib/products";
+import { useWishlist } from "@/hooks/use-shop";
 
 export function ProductCard({ product, compact }: { product: Product; compact?: boolean }) {
-  const [liked, setLiked] = useState(false);
+  const wishlist = useWishlist();
+  const liked = wishlist.has(product.id);
+
   return (
     <Link
       to="/product/$id"
@@ -21,7 +25,12 @@ export function ProductCard({ product, compact }: { product: Product; compact?: 
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
         <button
-          onClick={(e) => { e.preventDefault(); setLiked((v) => !v); }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const now = wishlist.toggle(product.id);
+            toast.success(now ? "Added to wishlist ♡" : "Removed from wishlist");
+          }}
           aria-label="Like"
           className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-cream/90 text-coffee backdrop-blur transition hover:bg-blush"
         >
@@ -31,7 +40,7 @@ export function ProductCard({ product, compact }: { product: Product; compact?: 
       <div className="flex flex-1 flex-col gap-1 p-4">
         <span className="text-xs uppercase tracking-wider text-coffee-light">{product.category}</span>
         <h3 className="font-display text-base font-semibold text-coffee-dark">{product.name}</h3>
-        <span className="mt-auto text-lg font-bold text-coffee">${product.price.toFixed(2)}</span>
+        <span className="mt-auto text-lg font-bold text-coffee">{formatINR(product.price)}</span>
       </div>
     </Link>
   );
