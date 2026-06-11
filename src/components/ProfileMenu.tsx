@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
-import { LayoutDashboard, Settings, ShoppingCart, Heart, LogOut, User } from "lucide-react";
+import { useNavigate, Link } from "@tanstack/react-router";
+import { Package, Settings, ShoppingCart, Heart, LogOut, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -51,10 +51,18 @@ export function ProfileMenu() {
       <DropdownMenuContent align="start" className="w-56 rounded-2xl border-coffee/20 bg-cream">
         <DropdownMenuLabel className="font-script text-xl text-coffee">Hi, {name}!</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="gap-2"><LayoutDashboard className="h-4 w-4" /> Dashboard</DropdownMenuItem>
-        <DropdownMenuItem className="gap-2"><Settings className="h-4 w-4" /> Settings</DropdownMenuItem>
-        <DropdownMenuItem className="gap-2"><ShoppingCart className="h-4 w-4" /> Cart</DropdownMenuItem>
-        <DropdownMenuItem className="gap-2"><Heart className="h-4 w-4" /> Liked Items</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/profile" className="gap-2 cursor-pointer"><Settings className="h-4 w-4" /> Profile & Settings</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/orders" className="gap-2 cursor-pointer"><Package className="h-4 w-4" /> My Orders</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/cart" className="gap-2 cursor-pointer"><ShoppingCart className="h-4 w-4" /> Cart</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/wishlist" className="gap-2 cursor-pointer"><Heart className="h-4 w-4" /> Liked Items</Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onSelect={onLogout} className="gap-2 text-coffee-dark">
           <LogOut className="h-4 w-4" /> Logout

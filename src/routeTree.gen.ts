@@ -13,6 +13,7 @@ import { Route as SplashRouteImport } from './routes/splash'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedCartRouteImport } from './routes/_authenticated/cart'
 import { Route as AuthenticatedProductIdRouteImport } from './routes/_authenticated/product.$id'
 
 const SplashRoute = SplashRouteImport.update({
@@ -34,6 +35,11 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCartRoute = AuthenticatedCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedProductIdRoute = AuthenticatedProductIdRouteImport.update({
   id: '/product/$id',
   path: '/product/$id',
@@ -44,11 +50,13 @@ export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
   '/splash': typeof SplashRoute
+  '/cart': typeof AuthenticatedCartRoute
   '/product/$id': typeof AuthenticatedProductIdRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/splash': typeof SplashRoute
+  '/cart': typeof AuthenticatedCartRoute
   '/': typeof AuthenticatedIndexRoute
   '/product/$id': typeof AuthenticatedProductIdRoute
 }
@@ -57,19 +65,21 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/splash': typeof SplashRoute
+  '/_authenticated/cart': typeof AuthenticatedCartRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/product/$id': typeof AuthenticatedProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/splash' | '/product/$id'
+  fullPaths: '/' | '/login' | '/splash' | '/cart' | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/splash' | '/' | '/product/$id'
+  to: '/login' | '/splash' | '/cart' | '/' | '/product/$id'
   id:
     | '__root__'
     | '/_authenticated'
     | '/login'
     | '/splash'
+    | '/_authenticated/cart'
     | '/_authenticated/'
     | '/_authenticated/product/$id'
   fileRoutesById: FileRoutesById
@@ -110,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/cart': {
+      id: '/_authenticated/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof AuthenticatedCartRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/product/$id': {
       id: '/_authenticated/product/$id'
       path: '/product/$id'
@@ -121,11 +138,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCartRoute: typeof AuthenticatedCartRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedProductIdRoute: typeof AuthenticatedProductIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCartRoute: AuthenticatedCartRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedProductIdRoute: AuthenticatedProductIdRoute,
 }
