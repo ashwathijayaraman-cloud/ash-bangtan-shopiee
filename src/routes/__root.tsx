@@ -129,10 +129,12 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
-    // First-visit splash gate
+    // First-visit splash gate — only redirect from root entry points to avoid blank-screen loops after auth
     try {
       const seen = sessionStorage.getItem("bangtan_splash_seen");
-      if (!seen && typeof window !== "undefined" && window.location.pathname !== "/splash") {
+      const path = typeof window !== "undefined" ? window.location.pathname : "";
+      if (!seen && (path === "/" || path === "/login")) {
+        sessionStorage.setItem("bangtan_splash_seen", "1");
         router.navigate({ to: "/splash", replace: true });
       }
     } catch { /* ignore */ }

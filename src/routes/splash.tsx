@@ -43,11 +43,15 @@ function SplashPage() {
 
   useEffect(() => {
     try { sessionStorage.setItem(SPLASH_SEEN_KEY, "1"); } catch { /* ignore */ }
-    const fadeT = setTimeout(() => setLeaving(true), 5200);
-    const navT = setTimeout(async () => {
-      const { data } = await supabase.auth.getUser();
-      navigate({ to: data.user ? "/" : "/login", replace: true });
-    }, 5900);
+    // Pre-resolve auth state so navigation is instant
+    let target: "/" | "/login" = "/login";
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) target = "/";
+    });
+    const fadeT = setTimeout(() => setLeaving(true), 3200);
+    const navT = setTimeout(() => {
+      navigate({ to: target, replace: true });
+    }, 3900);
     return () => { clearTimeout(fadeT); clearTimeout(navT); };
   }, [navigate]);
 
