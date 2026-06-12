@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { ShopHeader } from "@/components/ShopHeader";
-import { PandaIntro } from "@/components/PandaIntro";
+
 import { ProductCard } from "@/components/ProductCard";
 import { products } from "@/lib/products";
 import stationery1 from "@/assets/stationery-1.jpg";
@@ -35,7 +35,6 @@ function Index() {
 
   return (
     <>
-      <PandaIntro />
       <div className="min-h-screen bg-champagne">
         <ShopHeader activeCategory={category} onCategory={setCategory} />
 

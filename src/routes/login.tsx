@@ -40,7 +40,7 @@ function LoginPage() {
     setLoading(true);
     try {
       if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -49,11 +49,18 @@ function LoginPage() {
           },
         });
         if (error) throw error;
-        toast.success("Welcome to Bangtan Shopiee! ♡");
+        if (data.session) {
+          toast.success("Welcome to Bangtan Shopiee! ♡");
+          navigate({ to: "/", replace: true });
+        } else {
+          toast.success("Account created — please sign in ♡");
+          setMode("signin");
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("welcome back ♡");
+        navigate({ to: "/", replace: true });
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong");
