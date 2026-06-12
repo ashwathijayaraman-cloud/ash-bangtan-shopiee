@@ -133,7 +133,7 @@ function RootComponent() {
     try {
       const seen = sessionStorage.getItem("bangtan_splash_seen");
       const path = typeof window !== "undefined" ? window.location.pathname : "";
-      if (!seen && (path === "/" || path === "/login") && path !== "/splash") {
+      if (!seen && (path === "/" || path === "/login")) {
         sessionStorage.setItem("bangtan_splash_seen", "1");
         router.navigate({ to: "/splash", replace: true });
       }
