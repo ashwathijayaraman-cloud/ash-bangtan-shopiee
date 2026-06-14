@@ -6,8 +6,10 @@ import highlighters from "@/assets/highlighters.jpg";
 import artSupplies from "@/assets/art-supplies.jpg";
 import erasers from "@/assets/erasers.jpg";
 import stationery1 from "@/assets/stationery-1.jpg";
-import btsMySevenAsset from "@/assets/bts-my-seven.jpg.asset.json";
-const btsImage = btsMySevenAsset.url;
+import btsGiftBox from "@/assets/bts-gift-box.jpg";
+import btsPen from "@/assets/bts-pen.jpg";
+import btsPencil from "@/assets/bts-pencil.jpg";
+import btsStickers from "@/assets/bts-stickers.jpg";
 
 export type Product = {
   id: string;
