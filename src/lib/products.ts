@@ -6,6 +6,8 @@ import highlighters from "@/assets/highlighters.jpg";
 import artSupplies from "@/assets/art-supplies.jpg";
 import erasers from "@/assets/erasers.jpg";
 import stationery1 from "@/assets/stationery-1.jpg";
+import btsMySevenAsset from "@/assets/bts-my-seven.jpg.asset.json";
+const btsImage = btsMySevenAsset.url;
 
 export type Product = {
   id: string;
