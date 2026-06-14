@@ -6,8 +6,10 @@ import highlighters from "@/assets/highlighters.jpg";
 import artSupplies from "@/assets/art-supplies.jpg";
 import erasers from "@/assets/erasers.jpg";
 import stationery1 from "@/assets/stationery-1.jpg";
-import btsMySevenAsset from "@/assets/bts-my-seven.jpg.asset.json";
-const btsImage = btsMySevenAsset.url;
+import btsGiftBox from "@/assets/bts-gift-box.jpg";
+import btsPen from "@/assets/bts-pen.jpg";
+import btsPencil from "@/assets/bts-pencil.jpg";
+import btsStickers from "@/assets/bts-stickers.jpg";
 
 export type Product = {
   id: string;
@@ -47,16 +49,16 @@ export const products: Product[] = [
     specs: ["Notebook + pens + tape", "Pink pastel theme", "Gift-wrapped"] },
 
   // BTS Collection
-  { id: "bts-gift-box", name: "BTS Gift Box", category: "BTS Collection", price: 999, image: btsImage,
+  { id: "bts-gift-box", name: "BTS Gift Box", category: "BTS Collection", price: 999, image: btsGiftBox,
     description: "An ARMY-approved curated gift box with BTS pens, pencils, stickers, and a mini photocard.",
     specs: ["8+ BTS goodies", "Themed gift packaging", "Limited edition"] },
-  { id: "bts-pen", name: "BTS Pen", category: "BTS Collection", price: 89, image: btsImage,
+  { id: "bts-pen", name: "BTS Pen", category: "BTS Collection", price: 89, image: btsPen,
     description: "A sleek BTS-themed gel pen with a photocard charm. Writes like a dream.",
     specs: ["0.5mm tip", "Black gel ink", "Photocard charm"] },
-  { id: "bts-pencil", name: "BTS Pencil", category: "BTS Collection", price: 49, image: btsImage,
+  { id: "bts-pencil", name: "BTS Pencil", category: "BTS Collection", price: 49, image: btsPencil,
     description: "An HB pencil with member portraits and lyric quotes printed along the barrel.",
     specs: ["HB lead", "Pre-sharpened", "Pack of 1"] },
-  { id: "bts-stickers", name: "BTS Sticker Sheet", category: "BTS Collection", price: 149, image: btsImage,
+  { id: "bts-stickers", name: "BTS Sticker Sheet", category: "BTS Collection", price: 149, image: btsStickers,
     description: "A glossy sheet of BTS chibi stickers, logos, and tiny purple hearts.",
     specs: ["40+ stickers", "Waterproof", "ARMY-approved"] },
 
