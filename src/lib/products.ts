@@ -47,16 +47,16 @@ export const products: Product[] = [
     specs: ["Notebook + pens + tape", "Pink pastel theme", "Gift-wrapped"] },
 
   // BTS Collection
-  { id: "bts-gift-box", name: "BTS Gift Box", category: "BTS Collection", price: 999, image: stationery1,
+  { id: "bts-gift-box", name: "BTS Gift Box", category: "BTS Collection", price: 999, image: btsImage,
     description: "An ARMY-approved curated gift box with BTS pens, pencils, stickers, and a mini photocard.",
     specs: ["8+ BTS goodies", "Themed gift packaging", "Limited edition"] },
-  { id: "bts-pen", name: "BTS Pen", category: "BTS Collection", price: 89, image: colorPens,
+  { id: "bts-pen", name: "BTS Pen", category: "BTS Collection", price: 89, image: btsImage,
     description: "A sleek BTS-themed gel pen with a photocard charm. Writes like a dream.",
     specs: ["0.5mm tip", "Black gel ink", "Photocard charm"] },
-  { id: "bts-pencil", name: "BTS Pencil", category: "BTS Collection", price: 49, image: pencilBox,
+  { id: "bts-pencil", name: "BTS Pencil", category: "BTS Collection", price: 49, image: btsImage,
     description: "An HB pencil with member portraits and lyric quotes printed along the barrel.",
     specs: ["HB lead", "Pre-sharpened", "Pack of 1"] },
-  { id: "bts-stickers", name: "BTS Sticker Sheet", category: "BTS Collection", price: 149, image: stickers,
+  { id: "bts-stickers", name: "BTS Sticker Sheet", category: "BTS Collection", price: 149, image: btsImage,
     description: "A glossy sheet of BTS chibi stickers, logos, and tiny purple hearts.",
     specs: ["40+ stickers", "Waterproof", "ARMY-approved"] },
 
