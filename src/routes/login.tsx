@@ -20,10 +20,14 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
 });
 
+const USERNAME_EMAIL_DOMAIN = "bangtanshopiee.local";
+const usernameToEmail = (username: string) =>
+  `${username.trim().toLowerCase()}@${USERNAME_EMAIL_DOMAIN}`;
+
 function LoginPage() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<"signin" | "signup">("signin");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -39,13 +43,16 @@ function LoginPage() {
     e.preventDefault();
     setLoading(true);
     try {
+      const cleanUsername = username.trim().toLowerCase();
+      if (!cleanUsername) throw new Error("Please enter a username");
+      const email = usernameToEmail(cleanUsername);
       if (mode === "signup") {
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             emailRedirectTo: `${window.location.origin}/`,
-            data: { display_name: displayName || email.split("@")[0] },
+            data: { display_name: displayName || cleanUsername, username: cleanUsername },
           },
         });
         if (error) throw error;
