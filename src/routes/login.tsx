@@ -124,11 +124,12 @@ function LoginPage() {
 
           <label className="block text-sm font-medium text-coffee-dark">Username</label>
           <input
-            type="email"
+            type="text"
             required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your username"
+            autoComplete="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="e.g. jiminstan07"
             className="mt-1.5 w-full rounded-full border-2 border-coffee/30 bg-champagne px-5 py-3 text-coffee-dark placeholder:text-coffee-light/70 focus:border-coffee focus:outline-none"
           />
 
