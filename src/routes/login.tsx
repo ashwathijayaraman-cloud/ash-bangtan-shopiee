@@ -115,13 +115,13 @@ function LoginPage() {
             </>
           )}
 
-          <label className="block text-sm font-medium text-coffee-dark">Email</label>
+          <label className="block text-sm font-medium text-coffee-dark">Username</label>
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
+            placeholder="your username"
             className="mt-1.5 w-full rounded-full border-2 border-coffee/30 bg-champagne px-5 py-3 text-coffee-dark placeholder:text-coffee-light/70 focus:border-coffee focus:outline-none"
           />
 
