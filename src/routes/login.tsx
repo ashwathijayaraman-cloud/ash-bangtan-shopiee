@@ -21,8 +21,6 @@ export const Route = createFileRoute("/login")({
 });
 
 const USERNAME_EMAIL_DOMAIN = "bangtanshopiee.local";
-const usernameToEmail = (username: string) =>
-  `${username.trim().toLowerCase()}@${USERNAME_EMAIL_DOMAIN}`;
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -45,8 +43,9 @@ function LoginPage() {
     try {
       const cleanUsername = username.trim().toLowerCase();
       if (!cleanUsername) throw new Error("Please enter a username");
-      const email = usernameToEmail(cleanUsername);
+
       if (mode === "signup") {
+        const email = `${cleanUsername}@${USERNAME_EMAIL_DOMAIN}`;
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
@@ -64,8 +63,16 @@ function LoginPage() {
           setMode("signin");
         }
       } else {
+        // Look up the real email by username (works for both old email-based
+        // accounts and new username@bangtanshopiee.local accounts).
+        const { data: resolvedEmail } = await supabase.rpc("get_email_for_username", {
+          _username: cleanUsername,
+        });
+        const email =
+          (typeof resolvedEmail === "string" && resolvedEmail) ||
+          `${cleanUsername}@${USERNAME_EMAIL_DOMAIN}`;
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+        if (error) throw new Error("Invalid Username or Password");
         toast.success("welcome back ♡");
         navigate({ to: "/", replace: true });
       }
