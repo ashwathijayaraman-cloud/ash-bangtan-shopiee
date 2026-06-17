@@ -63,13 +63,22 @@ function LoginPage() {
           setMode("signin");
         }
       } else {
-        // Look up the real email by username (works for both old email-based
-        // accounts and new username@bangtanshopiee.local accounts).
-        const { data: resolvedEmail } = await supabase.rpc("get_email_for_username", {
+        // Look up auth info for this username so we can:
+        // 1) Block password login on Google-only accounts with a clear message
+        // 2) Resolve the actual stored email (works for old email accounts too)
+        const { data: infoRows } = await supabase.rpc("get_auth_info_for_username", {
           _username: cleanUsername,
         });
+        const info = Array.isArray(infoRows) ? infoRows[0] : infoRows;
+
+        if (info && info.has_google && !info.has_password) {
+          throw new Error(
+            "This account was created with Google. Please continue with Google Sign-In."
+          );
+        }
+
         const email =
-          (typeof resolvedEmail === "string" && resolvedEmail) ||
+          (info && typeof info.email === "string" && info.email) ||
           `${cleanUsername}@${USERNAME_EMAIL_DOMAIN}`;
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw new Error("Invalid Username or Password");
