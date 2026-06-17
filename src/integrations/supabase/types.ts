@@ -73,6 +73,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_auth_info_for_username: {
+        Args: { _username: string }
+        Returns: {
+          email: string
+          has_google: boolean
+          has_password: boolean
+        }[]
+      }
       get_email_for_username: { Args: { _username: string }; Returns: string }
     }
     Enums: {
