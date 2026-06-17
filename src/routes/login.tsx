@@ -165,7 +165,7 @@ function LoginPage() {
             disabled={loading}
             className="mt-5 block w-full rounded-full bg-coffee py-3 text-center font-semibold text-cream shadow-soft transition hover:bg-coffee-dark disabled:opacity-60"
           >
-            {loading ? "..." : mode === "signin" ? "Sign in" : "Create account"}
+            {loading ? "..." : mode === "signin" ? "Login" : "Create account"}
           </button>
 
           <div className="my-4 flex items-center gap-3 text-xs text-coffee-light">
